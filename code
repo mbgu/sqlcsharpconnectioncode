@@ -1,0 +1,147 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Data.SqlClient;
+
+//Data Source=MATLAB\SQLEXPRESS;Initial Catalog=mercoto;Integrated Security=True
+
+namespace otogaleri
+{
+    public partial class Form2 : Form
+    {
+        public Form2()
+        {
+            InitializeComponent();
+        }
+        SqlConnection conn;
+        SqlDataAdapter adapter;
+        SqlCommand cmd;
+        DataSet ds;
+        void OtoGetir()
+        {
+
+            conn = new SqlConnection("Data Source=MATLAB\\SQLEXPRESS;Initial Catalog=mercoto;Integrated Security=True");
+            conn.Open();
+            adapter = new SqlDataAdapter("Select*from aracozellikleri", conn);
+            ds = new DataSet();
+            adapter.Fill(ds, "aracozellikleri");
+            dataGridView1.DataSource = ds.Tables["aracozellikleri"];
+            conn.Close();
+        }
+
+
+
+
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'mercotoDataSet.aracozellikleri' table. You can move, or remove it, as needed.
+            this.aracozellikleriTableAdapter.Fill(this.mercotoDataSet.aracozellikleri);
+            OtoGetir();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            string sorgu = "Insert into aracozellikleri (saseno, marka, seri, model, yil, yakittipi, vites, kasatip, motorgucu, motorhacmi, renk) values (@saseno, @marka, @seri, @model, @yil, @yakittipi, @vites, @kasatip, @motorgucu, @motorhacmi, @renk)";
+            cmd = new SqlCommand(sorgu, conn);
+            cmd.Parameters.AddWithValue("@saseno", textBox1.Text);
+            cmd.Parameters.AddWithValue("@marka", textBox2.Text);
+            cmd.Parameters.AddWithValue("@seri", textBox3.Text);
+            cmd.Parameters.AddWithValue("@model", textBox4.Text);
+            cmd.Parameters.AddWithValue("@yil", textBox5.Text);
+            cmd.Parameters.AddWithValue("@yakittipi", textBox6.Text);
+            cmd.Parameters.AddWithValue("@vites", textBox7.Text);
+            cmd.Parameters.AddWithValue("@kasatip", textBox8.Text);
+            cmd.Parameters.AddWithValue("@motorgucu", textBox9.Text);
+            cmd.Parameters.AddWithValue("@motorhacmi", textBox10.Text);
+            cmd.Parameters.AddWithValue("@renk", textBox11.Text);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            OtoGetir();
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            textBox1.Clear();
+            textBox2.Clear();
+            textBox3.Clear();
+            textBox4.Clear();
+            textBox5.Clear();
+            textBox6.Clear();
+            textBox7.Clear();
+            textBox8.Clear();
+            textBox9.Clear();
+            textBox10.Clear();
+            textBox11.Clear();
+
+        }
+
+        private void dataGridView1_CellEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
+            textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
+            textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            textBox4.Text = dataGridView1.CurrentRow.Cells[3].Value.ToString();
+            textBox5.Text = dataGridView1.CurrentRow.Cells[4].Value.ToString();
+            textBox6.Text = dataGridView1.CurrentRow.Cells[5].Value.ToString();
+            textBox7.Text = dataGridView1.CurrentRow.Cells[6].Value.ToString();
+            textBox8.Text = dataGridView1.CurrentRow.Cells[7].Value.ToString();
+            textBox9.Text = dataGridView1.CurrentRow.Cells[8].Value.ToString();
+            textBox10.Text = dataGridView1.CurrentRow.Cells[9].Value.ToString();
+            textBox11.Text = dataGridView1.CurrentRow.Cells[10].Value.ToString();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string sorgu = "Update aracozellikleri set marka=@marka, seri=@seri, model=@model, yil=@yil, yakittipi=@yakittipi, vites=@vites, kasatip=@kasatip, motorgucu=@motorgucu, motorhacmi=motorhacmi, renk=@renk where saseno=@saseno";
+            cmd = new SqlCommand(sorgu, conn);
+            cmd.Parameters.AddWithValue("@saseno", textBox1.Text);
+            cmd.Parameters.AddWithValue("@marka", textBox2.Text);
+            cmd.Parameters.AddWithValue("@seri", textBox3.Text);
+            cmd.Parameters.AddWithValue("@model", textBox4.Text);
+            cmd.Parameters.AddWithValue("@yil", textBox5.Text);
+            cmd.Parameters.AddWithValue("@yakittipi", textBox6.Text);
+            cmd.Parameters.AddWithValue("@vites", textBox7.Text);
+            cmd.Parameters.AddWithValue("@kasatip", textBox8.Text);
+            cmd.Parameters.AddWithValue("@motorgucu", textBox9.Text);
+            cmd.Parameters.AddWithValue("@motorhacmi", textBox10.Text);
+            cmd.Parameters.AddWithValue("@renk", textBox11.Text);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            OtoGetir();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string sorgu = "Delete from aracozellikleri where saseno=@saseno";
+            cmd = new SqlCommand(sorgu, conn);
+            cmd.Parameters.AddWithValue("@saseno", textBox1.Text);
+            conn.Open();
+            cmd.ExecuteNonQuery();
+            conn.Close();
+            OtoGetir();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.ImageLocation = openFileDialog1.FileName;
+                label13.Text = openFileDialog1.FileName;
+                pictureBox1.ImageLocation = openFileDialog1.FileName;
+                
+            }
+        }
+    }
+}
