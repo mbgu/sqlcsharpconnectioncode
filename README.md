@@ -5,7 +5,7 @@ sql and c# connection and have a windows form application insert, update and del
 Car Dealership Management System
 
 Description:
-This C# and SQL-based application serves as a fundamental system for managing a car dealership. It is designed to facilitate the recording and management of essential information related to cars, their sellers, and buyers. The system also includes features for bulk purchasing, enabling the effortless addition of multiple cars to the database at once. The code is accompanied by a user-friendly interface tailored for the sales department, where personnel can upload images, input data, add new vehicles, make modifications, and even perform data deletion.
+This C# and SQL-based application serves as a fundamental system for managing a car dealership. It is designed to facilitate the recording and management of essential information related to cars, their sellers. The system also includes features for bulk purchasing, enabling the effortless addition of multiple cars to the database at once. The code is accompanied by a user-friendly interface tailored for the sales department, where personnel can upload images, input data, add new vehicles, make modifications, and even perform data deletion.
 
 Key Features:
 
@@ -17,9 +17,6 @@ The code allows for the creation and management of car listings, including detai
 
 Seller and Buyer Information:
 In addition to car details, the system keeps track of both seller and buyer information, ensuring that every transaction is recorded accurately.
-
-Bulk Car Import:
-A notable feature is the ability to import car data in bulk. This feature simplifies the process when several cars are acquired simultaneously. The information for each car is added to the database efficiently.
 
 Image Upload Capability:
 To enhance the quality of car listings, salespeople can upload images of the vehicles. This helps potential buyers get a clear view of what's available.
